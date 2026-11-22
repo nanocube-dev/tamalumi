@@ -719,11 +719,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
         val gb = runCatching { dl.bytesMissing() / 1e9 }.getOrDefault(3.0)
+        val totalGb = runCatching { dl.manifest().sumOf { it.size } / 1e9 }.getOrDefault(gb)
+        // after an interrupted download only the rest is missing – say so instead of a puzzling small total
+        val rest = if (gb < 0.1) "%.0f MB".format(maxOf(1.0, gb * 1000)) else "%.1f GB".format(gb)
+        val size = if (gb < totalGb - 0.05) "zusammen %.1f GB, davon fehlen noch %s".format(totalGb, rest)
+                   else "zusammen %.1f GB".format(gb)
         AlertDialog.Builder(this)
             .setTitle("Lumis Gehirn")
             .setMessage(
                 "Damit ich hören, denken und sprechen kann, brauche ich einmalig mein Gehirn: " +
-                    "Gemma 4 (Denken), Whisper (Hören) und eine Stimme – zusammen %.1f GB.\n\n".format(gb) +
+                    "Gemma 4 (Denken), Whisper (Hören) und eine Stimme – $size.\n\n" +
                     "Es kommt direkt von Hugging Face. Danach läuft alles offline auf deinem Handy – " +
                     "nichts von dem, was du mir sagst, verlässt es.\n\nWLAN empfohlen."
             )
@@ -836,13 +841,23 @@ class MainActivity : AppCompatActivity() {
             val pad = (20 * resources.displayMetrics.density).toInt()
             setPadding(pad, pad / 2, pad, pad)
         }
+        // Cap the text height: with three buttons (or large fonts) Android stacks them vertically, and an
+        // unbounded ScrollView pushed the stacked buttons off the dialog on the S23 (seen 2026-11-22).
+        val scroll = object : android.widget.ScrollView(this) {
+            override fun onMeasure(widthSpec: Int, heightSpec: Int) {
+                val cap = (resources.displayMetrics.heightPixels * 0.55f).toInt()
+                val size = MeasureSpec.getSize(heightSpec)
+                val max = if (MeasureSpec.getMode(heightSpec) == MeasureSpec.UNSPECIFIED) cap else minOf(cap, size)
+                super.onMeasure(widthSpec, MeasureSpec.makeMeasureSpec(max, MeasureSpec.AT_MOST))
+            }
+        }.apply { addView(text) }
         AlertDialog.Builder(this)
             .setTitle("Lizenzen & Quellcode")
-            .setView(android.widget.ScrollView(this).apply { addView(text) })
+            .setView(scroll)
             .setPositiveButton("OK", null)
-            .setNeutralButton("GPL-3.0 lesen") { _, _ -> showGplText() }
+            .setNeutralButton("Lizenztext") { _, _ -> showGplText() }
             .apply {
-                if (SOURCE_URL.isNotBlank()) setNegativeButton("Quellcode öffnen") { _, _ ->
+                if (SOURCE_URL.isNotBlank()) setNegativeButton("Quellcode") { _, _ ->
                     // the browser opens it – Lumi itself still makes no connection
                     runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_URL))) }
                 }

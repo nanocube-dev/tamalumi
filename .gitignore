@@ -20,3 +20,6 @@ test.log
 *.p12
 *.pepk
 keystore.properties
+# the websites (tamalumi.de/.com) carry the Impressum and are uploaded by hand – not part of the public repo
+website/
+website-en/
