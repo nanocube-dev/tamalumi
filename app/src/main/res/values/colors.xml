@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#FF070A16</color>
+    <color name="fg">#FFE9EEF7</color>
+    <color name="fg_dim">#FF8B98AD</color>
+    <color name="accent">#FF7FE3F0</color>
+    <color name="glass">#14FFFFFF</color>
+    <color name="glass_stroke">#29FFFFFF</color>
+    <color name="sheet">#FF12152A</color>
+</resources>

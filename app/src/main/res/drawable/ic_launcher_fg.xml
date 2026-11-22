@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- body: the mochi blob -->
+    <path android:pathData="M54,32c13,0 22,9.5 22,22.5c0,12 -9.5,19.5 -22,19.5s-22,-7.5 -22,-19.5C32,41.5 41,32 54,32z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="46" android:centerY="42" android:gradientRadius="40"
+                android:startColor="#FFFFE6CC" android:centerColor="#FFFF9E8C" android:endColor="#FF8E5BFF" />
+        </aapt:attr>
+    </path>
+    <!-- drifting colour cloud -->
+    <path android:pathData="M54,32c13,0 22,9.5 22,22.5c0,12 -9.5,19.5 -22,19.5s-22,-7.5 -22,-19.5C32,41.5 41,32 54,32z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="66" android:centerY="62" android:gradientRadius="18"
+                android:startColor="#B35FE3D6" android:endColor="#005FE3D6" />
+        </aapt:attr>
+    </path>
+    <!-- gloss -->
+    <path android:fillColor="#88FFFFFF" android:pathData="M42.5,38.5c3,-1.6 6.5,-1.4 7.4,0.2c0.8,1.6 -1.4,3.6 -4.4,4.8c-3,1.2 -5.6,0.8 -6,-0.6c-0.4,-1.4 0.8,-3.2 3,-4.4z" />
+    <!-- eyes -->
+    <path android:fillColor="#FF17142A" android:pathData="M45.5,47a2.8,2.8 0 0,1 2.8,2.8v4.4a2.8,2.8 0 0,1 -5.6,0v-4.4a2.8,2.8 0 0,1 2.8,-2.8z" />
+    <path android:fillColor="#FF17142A" android:pathData="M62.5,47a2.8,2.8 0 0,1 2.8,2.8v4.4a2.8,2.8 0 0,1 -5.6,0v-4.4a2.8,2.8 0 0,1 2.8,-2.8z" />
+    <path android:fillColor="#EEFFFFFF" android:pathData="M46.4,48.6a0.9,0.9 0 1,0 0.01,0z M63.4,48.6a0.9,0.9 0 1,0 0.01,0z" />
+    <!-- smile -->
+    <path android:strokeColor="#FF17142A" android:strokeWidth="1.6" android:strokeLineCap="round"
+        android:pathData="M50.5,60.5q3.5,2.6 7,0" />
+</vector>

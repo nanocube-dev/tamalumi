@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Lumi" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimary">@color/accent</item>
+        <item name="android:textColorPrimary">@color/fg</item>
+        <item name="android:textColorSecondary">@color/fg_dim</item>
+        <item name="alertDialogTheme">@style/Lumi.Dialog</item>
+    </style>
+
+    <style name="Lumi.Dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_sheet</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/fg</item>
+        <item name="android:textColor">@color/fg</item>
+        <item name="android:textColorSecondary">@color/fg_dim</item>
+        <item name="android:textColorAlertDialogListItem">@color/fg</item>
+    </style>
+
+    <style name="Lumi.Label" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/fg_dim</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="Lumi.Cell" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Lumi.RoundButton" parent="">
+        <item name="android:layout_width">54dp</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:background">@drawable/bg_glass_circle</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:tint">@color/fg</item>
+    </style>
+</resources>

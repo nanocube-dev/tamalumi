@@ -1,0 +1,22 @@
+*.iml
+.gradle/
+build/
+.kotlin/
+local.properties
+models/
+*.litertlm
+*.onnx
+*.task
+
+# built apps belong into GitHub releases, not into the repository
+*.apk
+*.aab
+build.log
+test.log
+*.part
+# signing keys never go into a public repository
+*.jks
+*.keystore
+*.p12
+*.pepk
+keystore.properties
