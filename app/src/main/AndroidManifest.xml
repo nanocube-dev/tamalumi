@@ -13,6 +13,10 @@
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" />
+    <!-- screenOrientation="portrait" implies this feature; optional so Play does not hide the app on landscape-only devices -->
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
 
     <application
         android:allowBackup="false"

@@ -46,6 +46,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -105,7 +107,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Lumi.init(applicationContext)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
 
         pet = findViewById(R.id.pet)
@@ -293,6 +294,17 @@ class MainActivity : AppCompatActivity() {
                 showStatus()
                 if (s == BrainState.SPEAKING || s == BrainState.THINKING) captionJob?.cancel()
                 if (s == BrainState.LISTENING || s == BrainState.READY) fadeCaptionLater()
+            }
+        }
+        // Keep the screen on only while it matters (open conversation, Lumi thinking/speaking, brain download);
+        // otherwise the normal screen timeout applies – the flag used to be set permanently and drained the battery.
+        scope.launch {
+            combine(brain.state, BrainDownload.running) { s, downloading ->
+                downloading || s == BrainState.LISTENING || s == BrainState.HEARING ||
+                    s == BrainState.THINKING || s == BrainState.SPEAKING
+            }.distinctUntilChanged().collect { on ->
+                if (on) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                else window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             }
         }
         scope.launch { brain.status.collect { showStatus() } }
